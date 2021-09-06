@@ -946,7 +946,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 93                 \
+    80, 80, 400, 97                 \
   }
 
 /**
@@ -956,7 +956,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE \
   {                          \
-    750, 750, 15, 25         \
+    500, 500, 15, 50         \
   }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -975,7 +975,7 @@
  */
 #define DEFAULT_MAX_ACCELERATION \
   {                              \
-    2000, 2000, 100, 5000        \
+    1500, 1500, 100, 1000        \
   }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
@@ -994,9 +994,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION 500         // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION 500 // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION 500  // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION 850         // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION 800 // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION 1000 // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1216,7 +1216,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    47, 0, 0                   \
+    47, 0, -2.65               \
   }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1604,7 +1604,7 @@
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
 // Set a height for the start of manual adjustment
-#define MANUAL_PROBE_START_Z 0.2 // (mm) Comment out to use the last-measured height
+//#define MANUAL_PROBE_START_Z 0.2 // (mm) Comment out to use the last-measured height
 #endif
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_BILINEAR, AUTO_BED_LEVELING_UBL)
@@ -1631,8 +1631,8 @@
 #define MESH_TEST_LAYER_HEIGHT 0.2 // (mm) Default layer height for G26.
 #define MESH_TEST_HOTEND_TEMP 205  // (°C) Default nozzle temperature for G26.
 #define MESH_TEST_BED_TEMP 60      // (°C) Default bed temperature for G26.
-#define G26_XY_FEEDRATE 20         // (mm/s) Feedrate for G26 XY moves.
-#define G26_XY_FEEDRATE_TRAVEL 100 // (mm/s) Feedrate for G26 XY travel moves.
+#define G26_XY_FEEDRATE 100        // (mm/s) Feedrate for G26 XY moves.
+#define G26_XY_FEEDRATE_TRAVEL 500 // (mm/s) Feedrate for G26 XY travel moves.
 #define G26_RETRACT_MULTIPLIER 1.0 // G26 Q (retraction) used by default between mesh test elements.
 #endif
 
@@ -1673,11 +1673,11 @@
 
 //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-#define MESH_INSET 10        // Set Mesh bounds as an inset region of the bed
-#define GRID_MAX_POINTS_X 10 // Don't use more than 15 points per axis, implementation limited.
+#define MESH_INSET 10       // Set Mesh bounds as an inset region of the bed
+#define GRID_MAX_POINTS_X 8 // Don't use more than 15 points per axis, implementation limited.
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-//#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
+#define UBL_HILBERT_CURVE // Use Hilbert distribution for less travel when probing multiple points
 
 #define UBL_MESH_EDIT_MOVES_Z   // Sophisticated users prefer no movement of nozzle
 #define UBL_SAVE_ACTIVE_ON_M500 // Save the currently active mesh in the current slot on M500
@@ -1719,7 +1719,7 @@
 #if ENABLED(LEVEL_BED_CORNERS)
 #define LEVEL_CORNERS_INSET_LFRB \
   {                              \
-    30, 30, 30, 30               \
+    15, 15, 15, 15               \
   }                              // (mm) Left, Front, Right, Back insets
 #define LEVEL_CORNERS_HEIGHT 0.0 // (mm) Z height of nozzle at leveling points
 #define LEVEL_CORNERS_Z_HOP 4.0  // (mm) Z height of nozzle between leveling points
@@ -1933,9 +1933,9 @@
   }
 //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
 //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
-#define NOZZLE_PARK_Z_RAISE_MIN 2   // (mm) Always raise Z by at least this distance
-#define NOZZLE_PARK_XY_FEEDRATE 100 // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-#define NOZZLE_PARK_Z_FEEDRATE 5    // (mm/s) Z axis feedrate (not used for delta printers)
+#define NOZZLE_PARK_Z_RAISE_MIN 5   // (mm) Always raise Z by at least this distance
+#define NOZZLE_PARK_XY_FEEDRATE 200 // (mm/s) X and Y axes feedrate (also used for delta Z axis)
+#define NOZZLE_PARK_Z_FEEDRATE 8    // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**

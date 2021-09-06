@@ -502,12 +502,12 @@
 //#define CONTROLLER_FAN_USE_Z_ONLY       // With this option only the Z axis is considered
 //#define CONTROLLER_FAN_IGNORE_Z         // Ignore Z stepper. Useful when stepper timeout is disabled.
 #define CONTROLLERFAN_SPEED_MIN 50     // (0-255) Minimum speed. (If set below this value the fan is turned off.)
-#define CONTROLLERFAN_SPEED_ACTIVE 255 // (0-255) Active speed, used when any motor is enabled
+#define CONTROLLERFAN_SPEED_ACTIVE 115 // (0-255) Active speed, used when any motor is enabled
 #define CONTROLLERFAN_SPEED_IDLE 0     // (0-255) Idle speed, used when motors are disabled
-#define CONTROLLERFAN_IDLE_TIME 30     // (seconds) Extra time to keep the fan running after disabling motors
+#define CONTROLLERFAN_IDLE_TIME 15     // (seconds) Extra time to keep the fan running after disabling motors
 
 // Use TEMP_SENSOR_BOARD as a trigger for enabling the controller fan
-#define CONTROLLER_FAN_MIN_BOARD_TEMP 30 // (°C) Turn on the fan if the board reaches this temperature
+#define CONTROLLER_FAN_MIN_BOARD_TEMP 40 // (°C) Turn on the fan if the board reaches this temperature
 
 #define CONTROLLER_FAN_EDITABLE // Enable M710 configurable settings
 #if ENABLED(CONTROLLER_FAN_EDITABLE)
@@ -825,7 +825,7 @@
 
 // Safety: The probe needs time to recognize the command.
 //         Minimum command delay (ms). Enable and increase if needed.
-#define BLTOUCH_DELAY 500
+//#define BLTOUCH_DELAY 100
 
 /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -940,13 +940,13 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-//#define ASSISTED_TRAMMING
+#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
 // Define positions for probe points.
 #define TRAMMING_POINT_XY                          \
    {                                               \
-      {20, 20}, {180, 20}, {180, 180}, { 20, 180 } \
+      {50, 50}, {250, 50}, {250, 250}, { 50, 250 } \
    }
 
 // Define position names for probe points.
@@ -956,11 +956,13 @@
 #define TRAMMING_POINT_NAME_4 "Back-Left"
 
 #define RESTORE_LEVELING_AFTER_G35 // Enable to restore leveling setup after operation
-//#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
+#define REPORT_TRAMMING_MM         // Report Z deviation (mm) for each point relative to the first
+#define ASSISTED_TRAMMING_WIZARD   // Add a Tramming Wizard to the LCD menu
 
-//#define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
-
-//#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
+#define ASSISTED_TRAMMING_WAIT_POSITION \
+   {                                    \
+      X_CENTER, Y_CENTER, 30            \
+   } // Move the nozzle out of the way for adjustment
 
 /**
    * Screw thread:
@@ -968,7 +970,7 @@
    *   M4: 40 = Clockwise, 41 = Counter-Clockwise
    *   M5: 50 = Clockwise, 51 = Counter-Clockwise
    */
-#define TRAMMING_SCREW_THREAD 30
+#define TRAMMING_SCREW_THREAD 40
 
 #endif
 
@@ -1249,7 +1251,7 @@
 #endif
 
 // Play a beep when the feedrate is changed from the Status Screen
-//#define BEEP_ON_FEEDRATE_CHANGE
+#define BEEP_ON_FEEDRATE_CHANGE
 #if ENABLED(BEEP_ON_FEEDRATE_CHANGE)
 #define FEEDRATE_CHANGE_BEEP_DURATION 10
 #define FEEDRATE_CHANGE_BEEP_FREQUENCY 440
@@ -1277,7 +1279,7 @@
 #endif
 
 // Include a page of printer information in the LCD Main Menu
-//#define LCD_INFO_MENU
+#define LCD_INFO_MENU
 #if ENABLED(LCD_INFO_MENU)
 //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
 #endif
@@ -1331,16 +1333,16 @@
 #endif
 
 // Scroll a longer status message into view
-//#define STATUS_MESSAGE_SCROLLING
+#define STATUS_MESSAGE_SCROLLING
 
 // On the Info Screen, display XY with one decimal place when possible
-//#define LCD_DECIMAL_SMALL_XY
+#define LCD_DECIMAL_SMALL_XY
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY
 
 // Show the E position (filament used) during printing
-//#define LCD_SHOW_E_TOTAL
+#define LCD_SHOW_E_TOTAL
 #endif
 
 // LCD Print Progress options
@@ -1348,7 +1350,7 @@
 #if ANY(HAS_MARLINUI_U8GLIB, EXTENSIBLE_UI, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, IS_DWIN_MARLINUI)
 #define SHOW_REMAINING_TIME // Display estimated time to completion
 #if ENABLED(SHOW_REMAINING_TIME)
-//#define USE_M73_REMAINING_TIME    // Use remaining time from M73 command instead of estimation
+#define USE_M73_REMAINING_TIME  // Use remaining time from M73 command instead of estimation
 #define ROTATE_PROGRESS_DISPLAY // Display (P)rogress, (E)lapsed, and (R)emaining time
 #endif
 #endif
@@ -1572,7 +1574,7 @@
 #endif
 
 // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-//#define BINARY_FILE_TRANSFER
+#define BINARY_FILE_TRANSFER
 
 /**
    * Set this option to one of the following (or the board's defaults apply):
@@ -1583,7 +1585,7 @@
    *
    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
    */
-//#define SDCARD_CONNECTION LCD
+#define SDCARD_CONNECTION ONBOARD
 
 // Enable if SD detect is rendered useless (e.g., by using an SD extender)
 //#define NO_SD_DETECT
@@ -1674,10 +1676,10 @@
 //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
 
 // Frivolous Game Options
-#define MARLIN_BRICKOUT
-#define MARLIN_INVADERS
-#define MARLIN_SNAKE
-#define GAMES_EASTER_EGG // Add extra blank lines above the "Games" sub-menu
+//#define MARLIN_BRICKOUT
+//#define MARLIN_INVADERS
+//#define MARLIN_SNAKE
+//#define GAMES_EASTER_EGG // Add extra blank lines above the "Games" sub-menu
 
 #endif // HAS_MARLINUI_U8GLIB
 
@@ -1949,7 +1951,7 @@
 //#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
 //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-#define LIN_ADVANCE_K 0     // Unit: mm compression per 1mm/s extruder speed
+#define LIN_ADVANCE_K 0.35  // Unit: mm compression per 1mm/s extruder speed
 #define LA_DEBUG            // If enabled, this will generate debug information output over USB.
 #define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
 #endif
@@ -2633,7 +2635,7 @@
 #define INTERPOLATE true
 
 #if AXIS_IS_TMC(X)
-#define X_CURRENT 650            // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT 680            // (mA) RMS current. Multiply by 1.414 for peak current.
 #define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.062
@@ -2651,7 +2653,7 @@
 #endif
 
 #if AXIS_IS_TMC(Y)
-#define Y_CURRENT 650
+#define Y_CURRENT 680
 #define Y_CURRENT_HOME Y_CURRENT
 #define Y_MICROSTEPS 16
 #define Y_RSENSE 0.11
@@ -2669,7 +2671,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z)
-#define Z_CURRENT 580
+#define Z_CURRENT 680
 #define Z_CURRENT_HOME Z_CURRENT
 #define Z_MICROSTEPS 16
 #define Z_RSENSE 0.062
@@ -2678,7 +2680,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z2)
-#define Z2_CURRENT 580
+#define Z2_CURRENT 680
 #define Z2_CURRENT_HOME Z2_CURRENT
 #define Z2_MICROSTEPS Z_MICROSTEPS
 #define Z2_RSENSE 0.062
@@ -2732,7 +2734,7 @@
 #endif
 
 #if AXIS_IS_TMC(E0)
-#define E0_CURRENT 650
+#define E0_CURRENT 880
 #define E0_MICROSTEPS 16
 #define E0_RSENSE 0.062
 #define E0_CHAIN_POS -1
@@ -2740,9 +2742,9 @@
 #endif
 
 #if AXIS_IS_TMC(E1)
-#define E1_CURRENT 800
+#define E1_CURRENT 680
 #define E1_MICROSTEPS E0_MICROSTEPS
-#define E1_RSENSE 0.11
+#define E1_RSENSE 0.062
 #define E1_CHAIN_POS -1
 //#define E1_INTERPOLATE true
 #endif
@@ -2942,12 +2944,12 @@
    */
 //#define HYBRID_THRESHOLD
 
-#define X_HYBRID_THRESHOLD 100 // [mm/s]
-#define X2_HYBRID_THRESHOLD 100
-#define Y_HYBRID_THRESHOLD 100
-#define Y2_HYBRID_THRESHOLD 100
-#define Z_HYBRID_THRESHOLD 3
-#define Z2_HYBRID_THRESHOLD 3
+#define X_HYBRID_THRESHOLD 120 // [mm/s]
+#define X2_HYBRID_THRESHOLD 120
+#define Y_HYBRID_THRESHOLD 120
+#define Y2_HYBRID_THRESHOLD 120
+#define Z_HYBRID_THRESHOLD 5
+#define Z2_HYBRID_THRESHOLD 5
 #define Z3_HYBRID_THRESHOLD 3
 #define Z4_HYBRID_THRESHOLD 3
 #define I_HYBRID_THRESHOLD 3
@@ -3641,14 +3643,14 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-//#define AUTO_REPORT_POSITION
+#define AUTO_REPORT_POSITION
 
 /**
  * Include capabilities in M115 output
  */
 #define EXTENDED_CAPABILITIES_REPORT
 #if ENABLED(EXTENDED_CAPABILITIES_REPORT)
-//#define M115_GEOMETRY_REPORT
+#define M115_GEOMETRY_REPORT
 #endif
 
 /**
@@ -3696,8 +3698,8 @@
 //#define NO_WORKSPACE_OFFSETS
 
 // Extra options for the M114 "Current Position" report
-#define M114_DETAIL // Use 'M114` for details to check planner calculations
-//#define M114_REALTIME       // Real current position based on forward kinematics
+#define M114_DETAIL   // Use 'M114` for details to check planner calculations
+#define M114_REALTIME // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
 #define REPORT_FAN_CHANGE // Report the new fan speed when changed by M106 (and others)
@@ -3874,9 +3876,9 @@
  */
 #define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
-//#define HOST_PAUSE_M76
-//#define HOST_PROMPT_SUPPORT
-//#define HOST_START_MENU_ITEM  // Add a menu item that tells the host to start
+#define HOST_PAUSE_M76
+#define HOST_PROMPT_SUPPORT
+#define HOST_START_MENU_ITEM // Add a menu item that tells the host to start
 #endif
 
 /**
