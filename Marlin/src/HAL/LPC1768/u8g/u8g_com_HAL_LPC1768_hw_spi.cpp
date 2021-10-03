@@ -66,7 +66,7 @@
   #ifdef SD_SPI_SPEED
     #define LCD_SPI_SPEED SD_SPI_SPEED    // Assume SPI speed shared with SD
   #else
-    #define LCD_SPI_SPEED SPI_FULL_SPEED  // Use full speed if SD speed is not supplied
+    #define LCD_SPI_SPEED SPI_SPEED_5  // Use full speed if SD speed is not supplied
   #endif
 #endif
 
@@ -84,7 +84,7 @@ uint8_t u8g_com_HAL_LPC1768_hw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, 
       u8g_SetPIOutput(u8g, U8G_PI_RESET);
       u8g_Delay(5);
       spiBegin();
-      spiInit(LCD_SPI_SPEED);
+      spiInit(SPI_SPEED_5);
       break;
 
     case U8G_COM_MSG_ADDRESS:                     /* define cmd (arg_val = 0) or data mode (arg_val = 1) */

@@ -63,7 +63,7 @@
 #include "../../shared/HAL_SPI.h"
 
 #ifndef LCD_SPI_SPEED
-  #define LCD_SPI_SPEED SPI_QUARTER_SPEED  // About 2 MHz
+  #define LCD_SPI_SPEED SPI_SIXTEENTH_SPEED  // About 2 MHz
 #endif
 
 #include <Arduino.h>

@@ -183,7 +183,7 @@ SPIClass::SPIClass(uint8_t device) {
     _settings[0].spi_d = LPC_SSP0;
     _settings[0].dataMode = SPI_MODE0;
     _settings[0].dataSize = DATA_SIZE_8BIT;
-    _settings[0].clock = SPI_CLOCK_MAX;
+    _settings[0].clock = SPI_CLOCK_DIV128;
     //_settings[0].clockDivider = determine_baud_rate(_settings[0].spi_d, _settings[0].clock);
   #endif
 
@@ -191,7 +191,7 @@ SPIClass::SPIClass(uint8_t device) {
     _settings[1].spi_d = LPC_SSP1;
     _settings[1].dataMode = SPI_MODE0;
     _settings[1].dataSize = DATA_SIZE_8BIT;
-    _settings[1].clock = SPI_CLOCK_MAX;
+    _settings[1].clock = SPI_CLOCK_DIV128;
     //_settings[1].clockDivider = determine_baud_rate(_settings[1].spi_d, _settings[1].clock);
   #endif
 

@@ -60,7 +60,7 @@
 #if HAS_MARLINUI_U8GLIB && DISABLED(U8GLIB_ST7920)
 
 #undef SPI_SPEED
-#define SPI_SPEED 2  // About 2 MHz
+#define SPI_SPEED 0.5  // About 2 MHz
 
 #include <Arduino.h>
 #include <U8glib-HAL.h>

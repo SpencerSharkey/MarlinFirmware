@@ -1927,7 +1927,7 @@
 #define BABYSTEP_ZPROBE_OFFSET // Combine M851 Z and Babystepping
 #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
 //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
-#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
+//#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
 #endif
 #endif
 
@@ -2099,20 +2099,23 @@
 //
 // G2/G3 Arc Support
 //
-#define ARC_SUPPORT // Disable this feature to save ~3226 bytes
+#define ARC_SUPPORT // Requires ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-#define MM_PER_ARC_SEGMENT 1 // (mm) Length (or minimum length) of each arc segment
-//#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
-#define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
-//#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections
-//#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
-//#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
-//#define SF_ARC_FIX              // Enable only if using SkeinForge with "Arc Point" fillet procedure
+#define MIN_ARC_SEGMENT_MM 0.1 // (mm) Minimum length of each arc segment
+#define MAX_ARC_SEGMENT_MM 1.0 // (mm) Maximum length of each arc segment
+#define MIN_CIRCLE_SEGMENTS 72 // Minimum number of segments in a complete circle
+//#define ARC_SEGMENTS_PER_SEC 50   // Use the feedrate to choose the segment length
+#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections                                      \
+                            //#define ARC_P_CIRCLES             // Enable the 'P' parameter to specify complete circles \
+                            //#define SF_ARC_FIX                // Enable only if using SkeinForge with "Arc Point" fillet procedure
 #endif
 
-// Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
-//#define BEZIER_CURVE_SUPPORT
+// G5 Bézier Curve Support with XYZE destination and IJPQ offsets
+//#define BEZIER_CURVE_SUPPORT        // Requires ~2666 bytes
+
+#if EITHER(ARC_SUPPORT, BEZIER_CURVE_SUPPORT)
+//#define CNC_WORKSPACE_PLANES      // Allow G2/G3/G5 to operate in XY, ZX, or YZ planes
+#endif
 
 /**
  * Direct Stepping
@@ -2167,7 +2170,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_PULSE 2
+#define MINIMUM_STEPPER_PULSE 0
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
@@ -2217,7 +2220,7 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 0
+#define TX_BUFFER_SIZE 128
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -2245,7 +2248,7 @@
 // Dump an error to the serial port if the serial receive buffer overflows.
 // If you see these errors, increase the RX_BUFFER_SIZE value.
 // Not supported on all platforms.
-//#define RX_BUFFER_MONITOR
+#define RX_BUFFER_MONITOR
 
 /**
  * Emergency Command Parser
@@ -2255,7 +2258,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -2272,7 +2275,7 @@
  * - During Hold all Emergency Parser commands are available, as usual.
  * - Enable NANODLP_Z_SYNC and NANODLP_ALL_AXIS for move command end-state reports.
  */
-//#define REALTIME_REPORTING_COMMANDS
+#define REALTIME_REPORTING_COMMANDS
 #if ENABLED(REALTIME_REPORTING_COMMANDS)
 //#define FULL_REPORT_TO_HOST_FEATURE   // Auto-report the machine status like Grbl CNC
 #endif
@@ -2734,7 +2737,7 @@
 #endif
 
 #if AXIS_IS_TMC(E0)
-#define E0_CURRENT 880
+#define E0_CURRENT 680
 #define E0_MICROSTEPS 16
 #define E0_RSENSE 0.062
 #define E0_CHAIN_POS -1
@@ -2881,7 +2884,7 @@
 #define STEALTHCHOP_I
 #define STEALTHCHOP_J
 #define STEALTHCHOP_K
-#define STEALTHCHOP_E
+//#define STEALTHCHOP_E
 
 /**
    * Optimize spreadCycle chopper parameters by using predefined parameter sets
@@ -3719,7 +3722,7 @@
 #define FASTER_GCODE_PARSER
 
 #if ENABLED(FASTER_GCODE_PARSER)
-//#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
+#define GCODE_QUOTED_STRINGS // Support for quoted string parameters
 #endif
 
 // Support for MeatPack G-code compression (https://github.com/scottmudge/OctoPrint-MeatPack)

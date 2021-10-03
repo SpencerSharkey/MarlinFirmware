@@ -46,7 +46,7 @@
 #define SPI_CLOCK_DIV64     250000 //(SCR: 99)  desired:   250,000  actual:   250,000         SPI_SPEED_6
 #define SPI_CLOCK_DIV128    125000 //(SCR:199)  desired:   125,000  actual:   125,000         Default from HAL.h
 
-#define SPI_CLOCK_MAX SPI_CLOCK_DIV2
+#define SPI_CLOCK_MAX SPI_CLOCK_DIV128
 
 #define BOARD_NR_SPI 2
 

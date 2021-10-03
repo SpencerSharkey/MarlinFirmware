@@ -84,13 +84,13 @@
  */
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-#define SHOW_BOOTSCREEN
+//#define SHOW_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
-#define SHOW_CUSTOM_BOOTSCREEN
+//#define SHOW_CUSTOM_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#define CUSTOM_STATUS_SCREEN_IMAGE
+//#define CUSTOM_STATUS_SCREEN_IMAGE
 
 // @section machine
 
@@ -143,7 +143,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Fuckbot"
+#define CUSTOM_MACHINE_NAME "printer-01"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -946,7 +946,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 97                 \
+    80, 80, 400, 400                \
   }
 
 /**
@@ -996,7 +996,7 @@
  */
 #define DEFAULT_ACCELERATION 850         // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION 800 // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION 1000 // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION 1250 // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1216,12 +1216,12 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    47, 0, -2.65               \
+    49, 4, -3.15               \
   }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 30
+#define PROBING_MARGIN 15
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (150 * 60)
@@ -1369,7 +1369,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true
+#define INVERT_E0_DIR false
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1416,7 +1416,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 400
+#define Z_MAX_POS 410
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1625,7 +1625,7 @@
 /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-#define G26_MESH_VALIDATION
+//#define G26_MESH_VALIDATION
 #if ENABLED(G26_MESH_VALIDATION)
 #define MESH_TEST_NOZZLE_SIZE 0.4  // (mm) Diameter of primary nozzle.
 #define MESH_TEST_LAYER_HEIGHT 0.2 // (mm) Default layer height for G26.
@@ -1673,8 +1673,8 @@
 
 //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-#define MESH_INSET 10       // Set Mesh bounds as an inset region of the bed
-#define GRID_MAX_POINTS_X 8 // Don't use more than 15 points per axis, implementation limited.
+#define MESH_INSET 5        // Set Mesh bounds as an inset region of the bed
+#define GRID_MAX_POINTS_X 4 // Don't use more than 15 points per axis, implementation limited.
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 #define UBL_HILBERT_CURVE // Use Hilbert distribution for less travel when probing multiple points
@@ -2509,7 +2509,7 @@
 // This is RAMPS-compatible using a single 10-pin connector.
 // (For CR-10 owners who want to replace the Melzi Creality board but retain the display)
 //
-#define CR10_STOCKDISPLAY
+// #define CR10_STOCKDISPLAY
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864

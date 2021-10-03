@@ -65,7 +65,7 @@
 #include "../../shared/HAL_SPI.h"
 
 #ifndef LCD_SPI_SPEED
-  #define LCD_SPI_SPEED SPI_EIGHTH_SPEED  // About 1 MHz
+  #define LCD_SPI_SPEED SPI_SPEED_5  // About 500 khz
 #endif
 
 static pin_t SCK_pin_ST7920_HAL, MOSI_pin_ST7920_HAL_HAL;
